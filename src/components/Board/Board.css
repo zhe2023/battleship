@@ -1,0 +1,12 @@
+.board__container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  border: 5px solid #f3b33e;
+  box-sizing: border-box;
+}
+
+.board__container span {
+  border: 1px solid #979797;
+  cursor: pointer;
+}

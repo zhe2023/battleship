@@ -1,0 +1,21 @@
+.hitCount__container {
+  display: grid;
+  grid-template-columns: 5fr repeat(5, 1fr);
+  align-items: center;
+  justify-items: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hitCount__container img {
+  object-fit: contain;
+}
+
+.hitCount__ship {
+  width: 96%;
+  margin-right: 4%;
+}
+
+.hitCount__hit {
+  width: 60%;
+}
