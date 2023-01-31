@@ -3,7 +3,7 @@ import { HitCount } from './HitCount';
 
 describe('HitCount', () => {
   it('renders ship image', () => {
-    render(<HitCount ship="carrier" count={1} />);
+    render(<HitCount shipType="carrier" count={1} />);
 
     const img = screen.getByAltText('carrier');
     expect(img).toBeInTheDocument();
@@ -11,7 +11,7 @@ describe('HitCount', () => {
   });
 
   it('renders correct hit count', () => {
-    render(<HitCount ship="carrier" count={3} />);
+    render(<HitCount shipType="carrier" count={3} />);
 
     const icons = screen.getAllByTestId<HTMLImageElement>('hitCount__icon');
     const alts = icons.map(({ alt }) => alt);

@@ -1,12 +1,9 @@
+import type { HitRecords } from '../../types';
+
 import hitImg from '../../assets/hit.png';
 import missImg from '../../assets/miss.png';
 
 import './BoardHits.css';
-
-interface HitRecords {
-  pos: [number, number];
-  hit: boolean;
-}
 
 interface BoardHitsProps {
   hitRecords: HitRecords[];

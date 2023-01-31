@@ -16,8 +16,8 @@ export const Board: React.FC<BoardProps> = ({ className, onHit }) => {
       className={classNames(className, 'board__container')}
       data-testid="board__container"
     >
-      {[...new Array(BOARD_SIZE[0])].map((_, x) =>
-        [...new Array(BOARD_SIZE[1])].map((_, y) => (
+      {[...new Array(BOARD_SIZE[0])].map((_, y) =>
+        [...new Array(BOARD_SIZE[1])].map((_, x) => (
           <span
             key={`${x}-${y}`}
             data-testid={`board__cell-${x}-${y}`}
