@@ -1,13 +1,24 @@
 import { Board } from '../Board';
 import { Score } from '../Score';
 import { HitCount } from '../HitCount';
+import { BoardHits } from '../BoardHits';
 
 import './App.css';
 
 export function App() {
   return (
     <div className="app__container">
-      <Board className="app__board" />
+      <div className="app__board">
+        <Board onHit={(x, y) => console.log(x, y)} />
+        <BoardHits
+          hitRecords={[
+            { pos: [2, 3], hit: true },
+            { pos: [6, 8], hit: false },
+            { pos: [0, 0], hit: false },
+            { pos: [9, 9], hit: false },
+          ]}
+        />
+      </div>
 
       <div className="app__stat">
         <div className="app__score">

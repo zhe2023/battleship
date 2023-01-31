@@ -4,6 +4,7 @@
   grid-template-rows: repeat(10, 1fr);
   border: 5px solid #f3b33e;
   box-sizing: border-box;
+  height: 100%;
 }
 
 .board__container span {

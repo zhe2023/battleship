@@ -1,0 +1,16 @@
+.boardHits__container {
+  position: absolute;
+  /* remove the border width for easy positioning */
+  height: calc(100% - 10px);
+  width: calc(100% - 10px);
+  margin: 5px;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.boardHits__cell {
+  position: absolute;
+  width: 10%;
+  height: 10%;
+}
