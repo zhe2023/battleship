@@ -12,6 +12,20 @@
   aspect-ratio: 1;
 }
 
+@supports not (aspect-ratio: 1) {
+  .app__board::before {
+    float: left;
+    padding-top: 100%;
+    content: "";
+  }
+
+  .app__board::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
 .app__stat {
   display: grid;
   grid-template-rows: auto 1fr;

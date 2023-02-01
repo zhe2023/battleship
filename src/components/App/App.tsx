@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Board } from '../Board';
 import { Score } from '../Score';
 import { HitCount } from '../HitCount';
@@ -14,7 +14,6 @@ const shipData = getShipData(data.shipTypes);
 
 export function App() {
   const [hitRecords, setHitRecords] = useState<HitRecord[]>([]);
-  const boardRef = useRef<HTMLDivElement>(null);
 
   const score = hitRecords.reduce((count, { hit }) => {
     return hit !== null ? count + 1 : count;
@@ -36,20 +35,9 @@ export function App() {
     [win]
   );
 
-  // For some legacy browsers do not support `aspect-ratio` to make the square
-  useEffect(() => {
-    if (!boardRef.current) {
-      return;
-    }
-    const { width, height } = boardRef.current.getBoundingClientRect();
-    if (width !== height) {
-      boardRef.current.style.height = `${width}px`;
-    }
-  }, []);
-
   return (
     <div className="app__container">
-      <div ref={boardRef} className="app__board">
+      <div className="app__board">
         <Board onHit={handleHit} />
         <BoardHits hitRecords={hitRecords} />
       </div>
