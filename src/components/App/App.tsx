@@ -1,26 +1,39 @@
+import { useCallback, useState } from 'react';
 import { Board } from '../Board';
 import { Score } from '../Score';
 import { HitCount } from '../HitCount';
 import { BoardHits } from '../BoardHits';
-import { getHitShip } from '../../utils/getHitShip';
+import { getHitShip, getHitCount, getShipData } from '../../utils';
 import { data } from '../../data';
 
-import type { HitRecords } from '../../types';
+import type { HitRecord } from '../../types';
 
 import './App.css';
-import { useState } from 'react';
+
+const shipData = getShipData(data.shipTypes);
 
 export function App() {
-  const [hitRecords, setHitRecords] = useState<HitRecords[]>([]);
+  const [hitRecords, setHitRecords] = useState<HitRecord[]>([]);
 
-  const handleHit = (x: number, y: number) => {
-    setHitRecords((records) => {
-      const exists = records.find(({ pos }) => pos[0] === x && pos[1] === y);
-      return exists
-        ? records
-        : [...records, { pos: [x, y], hit: getHitShip([x, y], data.layout) }];
-    });
-  };
+  const score = hitRecords.reduce((count, { hit }) => {
+    return hit !== null ? count + 1 : count;
+  }, 0);
+  const win = score === shipData.totalCount;
+
+  const handleHit = useCallback(
+    (x: number, y: number) => {
+      if (win) {
+        return;
+      }
+      setHitRecords((records) => {
+        const exists = records.find(({ pos }) => pos[0] === x && pos[1] === y);
+        return exists
+          ? records
+          : [...records, { pos: [x, y], hit: getHitShip([x, y], data.layout) }];
+      });
+    },
+    [win]
+  );
 
   return (
     <div className="app__container">
@@ -31,15 +44,19 @@ export function App() {
 
       <div className="app__stat">
         <div className="app__score">
-          <Score player="player 1" score={2}></Score>
-          <Score player="player 2" score={12}></Score>
+          <Score player="player 1" score={score} win={win}></Score>
+          <Score player="player 2" score={0}></Score>
         </div>
+
         <div className="app__hitCount">
-          <HitCount shipType="carrier" count={5} />
-          <HitCount shipType="battleship" count={4} />
-          <HitCount shipType="cruiser" count={3} />
-          <HitCount shipType="submarine" count={2} />
-          <HitCount shipType="destroyer" count={1} />
+          {shipData.sortedShips.map((shipType) => (
+            <HitCount
+              key={shipType}
+              shipType={shipType}
+              size={data.shipTypes[shipType].size}
+              count={getHitCount(shipType, hitRecords)}
+            />
+          ))}
         </div>
       </div>
     </div>

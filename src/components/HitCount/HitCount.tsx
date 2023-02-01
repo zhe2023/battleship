@@ -20,18 +20,23 @@ const SHIP_ICON_MAP = {
 
 interface HitCountProps {
   shipType: ShipType;
+  size: number;
   count: number;
 }
 
-export const HitCount: React.FC<HitCountProps> = ({ shipType, count }) => {
+export const HitCount: React.FC<HitCountProps> = ({
+  shipType,
+  size,
+  count,
+}) => {
   return (
-    <div className="hitCount__container">
+    <div className="hitCount__container" data-testid={`hitCount__${shipType}`}>
       <img
         className="hitCount__ship"
         src={SHIP_ICON_MAP[shipType]}
         alt={shipType}
       />
-      {[...new Array(5)].map((_, i) => {
+      {[...new Array(size)].map((_, i) => {
         const isHit = i < count;
         return (
           <img

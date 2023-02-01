@@ -14,4 +14,10 @@ describe('Score', () => {
 
     expect(screen.getByText('01')).toBeInTheDocument();
   });
+
+  it('renders WIN passing win=true', () => {
+    render(<Score player="player 1" score={1} win />);
+
+    expect(screen.getByText('WIN')).toBeInTheDocument();
+  });
 });

@@ -14,7 +14,7 @@ export type ShipLayout = {
   positions: [number, number][];
 };
 
-export type HitRecords = {
+export type HitRecord = {
   pos: [number, number];
   hit: ShipType | null;
 };
