@@ -10,11 +10,11 @@ describe('Board', () => {
     expect(screen.getByTestId('board__container').childElementCount).toBe(100);
   });
 
-  it('sends out the position when clicking on the board', () => {
+  it('sends out the position when clicking on the board', async () => {
     const mockedOnHit = jest.fn();
     render(<Board onHit={mockedOnHit} />);
 
-    userEvent.click(screen.getByTestId('board__cell-2-3'));
+    await userEvent.click(screen.getByTestId('board__cell-2-3'));
 
     expect(mockedOnHit).toBeCalledWith(2, 3);
   });
