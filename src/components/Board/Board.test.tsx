@@ -6,8 +6,7 @@ describe('Board', () => {
   it('renders 100 cells on the board', () => {
     render(<Board />);
 
-    // eslint-disable-next-line testing-library/no-node-access
-    expect(screen.getByTestId('board__container').childElementCount).toBe(100);
+    expect(screen.getAllByTestId(/board__cell/)).toHaveLength(100);
   });
 
   it('sends out the position when clicking on the board', async () => {
